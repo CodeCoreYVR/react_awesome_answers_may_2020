@@ -5,6 +5,18 @@ import './index.css';
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// mock-data
+
+const question = {
+  title: 'What is your favourite colour?',
+  body: 'Red, green, blue, orange, yellow. ',
+  createdAt: new Date(),
+  viewCount: 10,
+  author: {
+    firstName:'brandon',
+    lastName: 'lam'
+  }
+}
 // if you want to use javascript within JSX you need to write it within the curly braces {}
 
 function add(a, b) {
@@ -13,39 +25,41 @@ function add(a, b) {
 
 function App() {
   return (
-    <div>
-      <QuestionDetails/>
-      <AnswerDetails/>
-    </div>
+    <>
+      <QuestionDetails
+        question={question}></QuestionDetails>
+      <AnswerDetails body='red' author={{firstName: 'emma', lastName: 'stone'}} createdAt={new Date()}/>
+    </>
   )
 }
 
-function QuestionDetails() {
+function QuestionDetails(props) {
+  console.log(props);
   return (
     <div>
-      <h1> Hello from react </h1>
-      <h2>What is your favourite colour?</h2>
+      <h1> Hello from react</h1>
+      <h2>{props.question.title}</h2>
       <p>
-        Red, green, blue, orange, yellow. <br />
-        <small>By Michael Owen</small>
+        {props.question.body}<br />
+        <small>{props.question.author.firstName} {props.question.author.lastName}</small>
       </p>
       <p>
-        <small>Seen 10 times - Created {add(5, 1000)} days ago</small>
+      <small>Seen {props.question.viewCount} times - Created at {props.question.createdAt.toString()}</small>
       </p>
     </div>
   )
 }
 
-function AnswerDetails() {
+function AnswerDetails(props) {
   return (
     <div className='ui segment'>
       <div className='ui header'>Answer Details</div>
       <p>
-        Red. <br/>
-        <small>by Eden Hazard</small>
+        {props.body}<br/>
+      <small>by {props.author.firstName} {props.author.lastName}</small>
       </p>
       <p>
-        <small>Answered 2 days ago</small>
+      <small>Answered at {props.createdAt.toString()}</small>
       </p>
     </div>
   )
