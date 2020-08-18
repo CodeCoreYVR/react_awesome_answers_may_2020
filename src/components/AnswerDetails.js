@@ -1,15 +1,15 @@
 import React from 'react'
 
 function AnswerDetails(props) {
+  const createdAt = new Date(props.created_at)
   return (
     <div style={styles.container} className='ui segment'>
-      <div className='ui header' style={styles.heading}>Answer Details</div>
       <p>
         {props.body}<br/>
-      <small>by {props.author.firstName} {props.author.lastName}</small>
+      <small>by {props.author.full_name}</small>
       </p>
       <p>
-      <small>Answered at {props.createdAt.toString()}</small>
+      <small>Answered at {createdAt.toString()}</small>
       </p>
     </div>
   )
