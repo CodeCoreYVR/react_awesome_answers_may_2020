@@ -6,13 +6,14 @@ class QuestionIndexPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: mockQuestionsData
+      questions: mockQuestionsData,
+      hello: 'world'
     }
   }
 
   // the id within this method is the id of the question that was clicked
   handleDeleteButtonClick(event, id) {
-    this.setState((currentState) => {
+    this.setState((currentState, currentProps) => {
       // IMPORTANT: In React never mutate any objects (this includes arrays)
       // If you need to work on a object make a copy... and then work on the copy
       const questionsCopy = [...currentState.questions]; // spread syntax to copy an array (SHALLOW COPY)
