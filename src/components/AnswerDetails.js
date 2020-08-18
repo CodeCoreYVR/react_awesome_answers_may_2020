@@ -11,6 +11,7 @@ function AnswerDetails(props) {
       <p>
       <small>Answered at {createdAt.toString()}</small>
       </p>
+      <button onClick={(event) => {props.handleDeleteAnswer(props.id)}}>Delete</button>
     </div>
   )
 }

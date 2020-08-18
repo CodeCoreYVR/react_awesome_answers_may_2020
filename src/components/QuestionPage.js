@@ -10,6 +10,20 @@ class QuestionPage extends Component {
     this.state = {
       question: mockQuestionData
     }
+    this.deleteAnswer = this.deleteAnswer.bind(this) // if you pass down a function that needs access to `this` then you should .bind(this) within the constructor
+  }
+
+  deleteAnswer(id) { // this id will be the id of the question that should be deleted
+    this.setState((currentState) => {
+      const questionCopy = JSON.parse(JSON.stringify(currentState.question));
+      const newAnswers = questionCopy.answers.filter((currentAnswer) => {
+        return currentAnswer.id !== id;
+      })
+      questionCopy.answers = newAnswers
+      return {
+        question: questionCopy
+      }
+    })
   }
 
   render() {
@@ -17,7 +31,7 @@ class QuestionPage extends Component {
       <main id='question-show-page'>
         <QuestionDetails question={this.state.question}></QuestionDetails>
         <h2>Answer Details</h2>
-        <AnswerDetailsList answers={this.state.question.answers} />
+        <AnswerDetailsList answers={this.state.question.answers} handleDeleteAnswer={this.deleteAnswer}/>
       </main>
     )
   }

@@ -5,7 +5,7 @@ function AnswerDetailsList(props) {
   return(
     <>
       { props.answers.map( (answer, i) => {
-        return <AnswerDetails key={i} body={answer.body} author={answer.author} createdAt={answer.createdAt}/>
+        return <AnswerDetails id={answer.id} key={i} body={answer.body} author={answer.author} createdAt={answer.createdAt} handleDeleteAnswer={props.handleDeleteAnswer}/>
       }) }
     </>
   )
