@@ -1,6 +1,7 @@
 import React from 'react'; // If you're using JSX you must import React at the top of the file
 import QuestionPage from './components/QuestionPage';
 import QuestionIndexPage from './components/QuestionIndexPage'
+import QuestionCreatePage from './components/QuestionCreatePage';
 
 import questionData from './data/oneQuestionData';
 export function App() {
@@ -9,6 +10,7 @@ export function App() {
      {/* <QuestionPage question={questionData}/> */}
      <QuestionPage />
      <QuestionIndexPage />
+     <QuestionCreatePage />
     </>
   );
 }
