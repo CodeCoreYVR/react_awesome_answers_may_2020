@@ -43,7 +43,7 @@ export const Question = {
   }
 }
 
-const Session = {
+export const Session = {
   create(params) {
     return fetch(`${BASE_URL}/session`, {
       method: 'POST',
