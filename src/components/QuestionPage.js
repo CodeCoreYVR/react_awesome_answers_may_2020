@@ -13,7 +13,7 @@ class QuestionPage extends Component {
   }
 
   componentDidMount() {
-    Question.show(20)
+    Question.show(this.props.match.params.id)
       .then(question => {
         console.log(question);
         this.setState(() => {
