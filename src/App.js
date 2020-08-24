@@ -9,6 +9,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 import questionData from './data/oneQuestionData';
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        <Navbar />
         <Switch>
           {/* When creating routes: make sure the higher specificity routes sit above lower specificity routes */}
           <Route path='/questions' exact={true} component={QuestionIndexPage}/>
