@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import QuestionDetails from './QuestionDetails';
 import AnswerDetailsList from './AnswerDetailsList';
-
-import mockQuestionData from '../data/oneQuestionData';
+import { Question } from '../requests';
 
 class QuestionPage extends Component {
   constructor(props) {
     super(props); // in all React Class components you must always call the `super(props)` within the constructor
     this.state = {
-      question: mockQuestionData
+      question: {}
     }
     this.deleteAnswer = this.deleteAnswer.bind(this) // if you pass down a function that needs access to `this` then you should .bind(this) within the constructor
+  }
+
+  componentDidMount() {
+    Question.show(20)
+      .then(question => {
+        console.log(question);
+        this.setState(() => {
+          return {
+            question: question
+          }
+        })
+      })
   }
 
   deleteAnswer(id) { // this id will be the id of the question that should be deleted

@@ -9,7 +9,6 @@ export function App() {
   return (
     <>
      {/* <QuestionPage question={questionData}/> */}
-     <Clock />
      <QuestionPage />
      <QuestionIndexPage />
      <QuestionCreatePage />

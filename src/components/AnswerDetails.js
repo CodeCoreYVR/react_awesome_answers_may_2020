@@ -6,7 +6,7 @@ function AnswerDetails(props) {
     <div style={styles.container} className='ui segment'>
       <p>
         {props.body}<br/>
-      <small>by {props.author.full_name}</small>
+      <small>by { props.author ? props.author.full_name : ''}</small>
       </p>
       <p>
       <small>Answered at {createdAt.toString()}</small>

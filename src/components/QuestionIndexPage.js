@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
-
-import mockQuestionsData from '../data/questionsData';
+import { Question } from '../requests';
 
 class QuestionIndexPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: mockQuestionsData,
+      questions: [],
       hello: 'world'
     }
+  }
+
+  componentDidMount() {
+    Question.index()
+      .then(questions => {
+        this.setState((state) => {
+          return {
+            questions: questions
+          }
+        })
+      });
   }
 
   // the id within this method is the id of the question that was clicked
