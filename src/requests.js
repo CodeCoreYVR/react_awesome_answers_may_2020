@@ -53,5 +53,11 @@ export const Session = {
       },
       body: JSON.stringify(params)
     }).then(res => res.json());
+  },
+
+  getCurrentUser() {
+    return fetch(`${BASE_URL}/current_user`, {
+      credentials: 'include'
+    }).then(res => res.json());
   }
 }

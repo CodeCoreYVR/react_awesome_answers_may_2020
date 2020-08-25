@@ -13,8 +13,22 @@ import Navbar from './components/Navbar';
 import SignInPage from './components/SignInPage';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    }
+  }
 
   componentDidMount() {
+    Session.getCurrentUser()
+      .then(user => {
+        this.setState((state) => {
+          return {
+            user: user
+          }
+        })
+      });
   }
 
   signIn(params) {
@@ -25,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Navbar />
+        <Navbar user={this.state.user}/>
         <Switch>
           {/* When creating routes: make sure the higher specificity routes sit above lower specificity routes */}
           <Route path='/questions' exact={true} component={QuestionIndexPage}/>
