@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SignInPage({ signIn }) {
+function SignInPage({ signIn, history }) {
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -9,7 +9,7 @@ function SignInPage({ signIn }) {
       email: formData.get('email'),
       password: formData.get('password')
     }
-    signIn(params);
+    signIn(params, history);
   }
   return(
     <main id='sign-in-page'>

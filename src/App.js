@@ -7,7 +7,8 @@ import { Session } from './requests';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch,
+
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SignInPage from './components/SignInPage';
@@ -18,9 +19,16 @@ class App extends Component {
     this.state = {
       user: null
     }
+    
+    this.getCurrentUser = this.getCurrentUser.bind(this);
+    this.signIn = this.signIn.bind(this);
   }
 
   componentDidMount() {
+    this.getCurrentUser();
+  }
+
+  getCurrentUser() {
     Session.getCurrentUser()
       .then(user => {
         this.setState((state) => {
@@ -31,9 +39,12 @@ class App extends Component {
       });
   }
 
-  signIn(params) {
+  signIn(params, history) {
     Session.create(params)
-      .then((res) => console.log(res));
+      .then((res) => {
+        history.push('/questions')
+        this.getCurrentUser();
+      });
   }
 
   render() {
@@ -51,7 +62,8 @@ class App extends Component {
             render={
             // routeProps is the object with `match`, `history`, and `location`
             (routeProps) => {
-              return <SignInPage signIn={this.signIn}/>
+              console.log(routeProps);
+              return <SignInPage {...routeProps} signIn={this.signIn}/>
             }
           }/>
         </Switch>
