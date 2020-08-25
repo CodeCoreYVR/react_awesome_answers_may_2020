@@ -15,11 +15,11 @@ import SignInPage from './components/SignInPage';
 class App extends Component {
 
   componentDidMount() {
-    // Hacky login. Don't do this in Real Life
-    Session.create({
-      email: 'js@winterfell.gov',
-      password: 'supersecret'
-    }).then((res) => console.log(res));
+  }
+
+  signIn(params) {
+    Session.create(params)
+      .then((res) => console.log(res));
   }
 
   render() {
@@ -31,7 +31,15 @@ class App extends Component {
           <Route path='/questions' exact={true} component={QuestionIndexPage}/>
           <Route path='/questions/new' component={QuestionCreatePage} />
           <Route path='/questions/:id' component={QuestionPage} />
-          <Route path='/sign_in' component={SignInPage} />
+          {/* <Route path='/sign_in' component={SignInPage} /> */}
+          <Route path='/sign_in'
+          // the render prop is another way to have a route render out a component. Use this if you need to pass props into the components you're rendering within <Route>
+            render={
+            // routeProps is the object with `match`, `history`, and `location`
+            (routeProps) => {
+              return <SignInPage signIn={this.signIn}/>
+            }
+          }/>
         </Switch>
       </BrowserRouter>
     );

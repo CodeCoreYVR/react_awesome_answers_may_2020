@@ -1,9 +1,19 @@
 import React from 'react';
 
-function SignInPage() {
+function SignInPage({ signIn }) {
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const params = {
+      email: formData.get('email'),
+      password: formData.get('password')
+    }
+    signIn(params);
+  }
   return(
     <main id='sign-in-page'>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor='email'>Email</label>
           <input type='text' id='email' name='email'/>
