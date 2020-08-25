@@ -7,6 +7,8 @@ function Navbar() {
       <Link to='/questions'>Question Index Page</Link>
       |
       <Link to='/questions/new'>Create A Question</Link>
+      |
+      <Link to='/sign_in'>Sign In</Link>
     </nav>
   )
 }

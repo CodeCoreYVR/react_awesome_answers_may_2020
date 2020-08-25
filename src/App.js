@@ -10,8 +10,8 @@ import {
   Switch
 } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import SignInPage from './components/SignInPage';
 
-import questionData from './data/oneQuestionData';
 class App extends Component {
 
   componentDidMount() {
@@ -31,6 +31,7 @@ class App extends Component {
           <Route path='/questions' exact={true} component={QuestionIndexPage}/>
           <Route path='/questions/new' component={QuestionCreatePage} />
           <Route path='/questions/:id' component={QuestionPage} />
+          <Route path='/sign_in' component={SignInPage} />
         </Switch>
       </BrowserRouter>
     );
