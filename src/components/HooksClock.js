@@ -10,7 +10,7 @@ export default function HooksClock() {
         return state + 1;
       })
     }, 1000)
-    return () => clearInterval(id)
+    // return () => clearInterval(id)
   }, [])
 
   useEffect(() => {

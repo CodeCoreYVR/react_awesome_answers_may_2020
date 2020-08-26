@@ -3,6 +3,7 @@ import QuestionPage from './components/QuestionPage';
 import QuestionIndexPage from './components/QuestionIndexPage'
 import QuestionCreatePage from './components/QuestionCreatePage';
 import HooksClock from './components/HooksClock';
+import WorldTimers from './components/WorldTimers';
 import { Session } from './requests';
 import {
   BrowserRouter,
@@ -53,6 +54,7 @@ class App extends Component {
       <BrowserRouter>
         <Navbar user={this.state.user}/>
         <Switch>
+          <Route path='/world_timers' component={WorldTimers} />
           <Route path='/clock' component={HooksClock} />
           {/* When creating routes: make sure the higher specificity routes sit above lower specificity routes */}
           <Route path='/questions' exact={true} component={QuestionIndexPage}/>
