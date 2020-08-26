@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function NewQuestionForm({ handleSubmit, title, body, updateQuestionParams}) {
-
+  console.log(title);
   function handleUpdate(e) {
     const input = e.target;
     // console.log(input.value);
@@ -18,10 +18,9 @@ export default function NewQuestionForm({ handleSubmit, title, body, updateQuest
       handleSubmit();
     }}>
       <label htmlFor='title'>title</label>
-      <p>{20 - title.length} Characters Left</p>
-      <input type='text' name='title' id='title' value={title} onInput={handleUpdate} disabled={title.length === 20}/>
+      <input type='text' name='title' id='title' value={title} onChange={handleUpdate} disabled={title.length === 20}/>
       <label htmlFor='body'>body</label>
-      <input type='text' name='body' id='body' value={body} onInput={handleUpdate}/>
+      <input type='text' name='body' id='body' value={body} onChange={handleUpdate}/>
       <input type='submit' value='Create Question'/>
     </form>
   )
