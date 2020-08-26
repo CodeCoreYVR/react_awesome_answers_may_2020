@@ -2,7 +2,7 @@ import React, { Component } from 'react'; // If you're using JSX you must import
 import QuestionPage from './components/QuestionPage';
 import QuestionIndexPage from './components/QuestionIndexPage'
 import QuestionCreatePage from './components/QuestionCreatePage';
-import Clock from './components/Clock';
+import HooksClock from './components/HooksClock';
 import { Session } from './requests';
 import {
   BrowserRouter,
@@ -53,6 +53,7 @@ class App extends Component {
       <BrowserRouter>
         <Navbar user={this.state.user}/>
         <Switch>
+          <Route path='/clock' component={HooksClock} />
           {/* When creating routes: make sure the higher specificity routes sit above lower specificity routes */}
           <Route path='/questions' exact={true} component={QuestionIndexPage}/>
           {/* <Route path='/questions/new' component={QuestionCreatePage} /> */}
