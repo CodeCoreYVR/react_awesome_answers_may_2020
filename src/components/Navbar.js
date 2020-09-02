@@ -1,17 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Nav, Button, Text } from 'grommet';
 
 function Navbar({ user }) {
   return(
-    <nav>
-      <Link to='/questions'>Question Index Page</Link>
-      |
-      <Link to='/questions/new'>Create A Question</Link>
-      |
+    <Nav direction="row" background="brand" pad="medium">
+      <Link to='/questions'><Button secondary label='Question Index' /></Link>
+      <Link to='/questions/new'><Button secondary label='Create A Question'/></Link>
       {
-        user ? <span>{user.first_name} {user.last_name}</span> : <Link to='/sign_in'>Sign In</Link>
+        user ? <Text alignSelf='center'>{user.first_name} {user.last_name}</Text> : <Link to='/sign_in'><Button secondary label='Sign In' /></Link>
       }
-    </nav>
+    </Nav>
   )
 }
 
