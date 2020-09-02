@@ -9,7 +9,8 @@ export default function NewUserPage() {
     const fd = new FormData(currentTarget);
     fetch('http://localhost:3000/api/v1/users', {
       method: 'POST',
-      body: fd
+      body: fd,
+      credentials: 'include'
     }).then(res => res.json())
     .then(payload => {
       setProfilePicture(payload.avatar_url)
