@@ -16,6 +16,7 @@ import SignInPage from './components/SignInPage';
 import AuthRoute from './components/AuthRoute';
 import { Grommet, Box } from 'grommet';
 import theme_one from './theme_one.json';
+import NewUserPage from './components/NewUserPage';
 
 class App extends Component {
   constructor(props) {
@@ -69,6 +70,7 @@ class App extends Component {
                 component={QuestionCreatePage}
               />
               <Route path='/questions/:id' component={QuestionPage} />
+              <Route path='/users/new' component={NewUserPage} />
               {/* <Route path='/sign_in' component={SignInPage} /> */}
               <Route path='/sign_in'
               // the render prop is another way to have a route render out a component. Use this if you need to pass props into the components you're rendering within <Route>
