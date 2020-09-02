@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Question } from '../requests';
 import { Link } from 'react-router-dom';
+import { Main, Heading, Box, List, Text } from 'grommet';
 
 class QuestionIndexPage extends Component {
   constructor(props) {
@@ -41,19 +42,27 @@ class QuestionIndexPage extends Component {
 
   render() {
     return(
-      <main id='question-index-page'>
-        <h1>Question Index</h1>
-        <ul>
-          {this.state.questions.map((question) => {
-            return <li key={question.id}>
-              <Link to={`/questions/${question.id}`}>{question.title}</Link>
-              <button onClick={ (event) => this.handleDeleteButtonClick(event, question.id) }>
-                Delete
-              </button>
-            </li>
-          })}
-        </ul>
-      </main>
+      <Main id='question-index-page'>
+        <Heading>Question Index</Heading>
+        <Box>
+          <List
+            primaryKey='id'
+            secondaryKey='title'
+            data={this.state.questions}
+            children={(item, index, opts) => {
+              return(
+                <Box key={item.id} direction='row' alignContent='end' gap='medium'>
+                  <Link to={`/questions/${item.id}`}><Text>{item.title}</Text></Link>
+                  <button onClick={ (event) => this.handleDeleteButtonClick(event, item.id) }>
+                    Delete
+                  </button>
+                </Box>
+              )
+            }}
+          >
+          </List>
+        </Box>
+      </Main>
     )
   }
 }
