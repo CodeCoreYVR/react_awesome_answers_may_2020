@@ -1,28 +1,36 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react';
 import NewQuestionForm from './NewQuestionForm';
 import { Question } from '../requests';
 
-class QuestionCreatePage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      created: false,
-      errors: {}
-    }
+function QuestionCreatePage(props) {
+  // useState allows us to add state to a functional component
+  // the function accepts the default state as an argument and returns an array with 2 values. The first value within the array is the state (getter). The second value within the array is a function to update the state (setter).
+  const [newQuestionParams, setNewQuestionParams] = useState({
+    title: '',
+    body: ''
+  });
+  const [errors, setErrors] = useState({});
 
-    this.createQuestion = this.createQuestion.bind(this)
+  function updateQuestionParams(params) {
+    setNewQuestionParams((state) => {
+      console.log(params);
+      console.log(state);
+      const newQuestionparamsCopy = {...state};
+      return {
+        ...newQuestionparamsCopy,
+        ...params
+      }
+    })
   }
 
-  // this method updates the state of QuestionCreatePage using this.setState
-  createQuestion(params) {
-    console.log(params);
-    Question.create(params)
+  function createQuestion() {
+    Question.create(newQuestionParams)
       .then(res => {
         if(res.id) {
-          this.props.history.push(`/questions/${res.id}`)
+          props.history.push(`/questions/${res.id}`)
         }
         if (res.errors) {
-          this.setState(() => {
+          setErrors(() => {
             return {
               errors: res.errors
             }
@@ -31,22 +39,25 @@ class QuestionCreatePage extends Component {
       });
   }
 
-  render() {
-    return(
-      <main id='question-create-page'>
-        {
-          Object.keys(this.state.errors).map(key => {
-            return(
-            <div>{key} {this.state.errors[key].join(', ')}</div>
-            )
-          })
-        }
-        {/* we pass this.createQuestion to a child component because we want event's on a child component to trigger an update to state */}
-        <NewQuestionForm handleSubmit={this.createQuestion}/>
-        {/* Remember! when you pass down a method as a function through props the `this` value within the, now, function will be the global scope! So we need to make sure we bind the method to force the `this` value to be QuestionCreatePage */}
-      </main>
-    )
-  }
+  return(
+    <main id='question-create-page'>
+      {
+        Object.keys(errors).map(key => {
+          return(
+          <div>{key} {errors[key].join(', ')}</div>
+          )
+        })
+      }
+      {/* we pass this.createQuestion to a child component because we want event's on a child component to trigger an update to state */}
+      <NewQuestionForm
+        handleSubmit={createQuestion}
+        title={newQuestionParams.title}
+        body={newQuestionParams.body}
+        updateQuestionParams={updateQuestionParams}
+      />
+      {/* Remember! when you pass down a method as a function through props the `this` value within the, now, function will be the global scope! So we need to make sure we bind the method to force the `this` value to be QuestionCreatePage */}
+    </main>
+  )
 }
 
-export default QuestionCreatePage
+export default QuestionCreatePage;
